@@ -2,8 +2,6 @@
 [![Build Status](https://travis-ci.org/h2non/htgen.png)](https://travis-ci.org/h2non/htgen)
 [![Dependency Status](https://gemnasium.com/h2non/htgen.png)](https://gemnasium.com/h2non/htgen)
 
-> **SPOILER! Work in progress**
-
 ## About
 
 **htgen** is a tiny but featured hypertext markup code generator for JavaScript environments. 
