@@ -181,3 +181,5 @@ $ grunt dev [--force]
 Copyright (c) Tomas Aparicio
 
 Released under the MIT license
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
