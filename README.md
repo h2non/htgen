@@ -133,7 +133,7 @@ Chainable: `yes`
 Creates and push new child node, but changes the chain call to the instance of the created child node
 
 #### render([ options ])
-Alias: `r`, `text`
+Alias: `r`
 Return: `string`
 
 Render and return a string of the current node and all of its child nodes
