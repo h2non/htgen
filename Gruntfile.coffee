@@ -9,15 +9,18 @@ module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
 
-    clean: ['htgen.js', 'test/*.js', 'test/fixtures/.tmp/**']
+    clean: ['htgen.js', 'lib', 'test/*.js', 'test/fixtures/.tmp/**']
 
     livescript:
       options:
         bare: true
         prelude: true
       src:
-        files:
-          'htgen.js': ['src/htgen.ls']
+        expand: true
+        cwd: 'src'
+        src: ['*.ls']
+        dest: 'lib'
+        ext: '.js'
 
       test:
         expand: true
@@ -42,19 +45,7 @@ module.exports = (grunt) ->
         options:
           standalone: 'htgen'
         files:
-          'htgen.js': './htgen.js'
-
-    uglify:
-      options:
-        beautify: true
-        mangle: false
-        compression: true
-        report: 'min'
-        banner: '/*! htgen - v<%= pkg.version %> - MIT License - https://github.com/h2non/htgen ' +
-          '| Generated <%= grunt.template.today("yyyy-mm-dd hh:MM") %> */\n'
-      min:
-        files:
-          'htgen.js': ['htgen.js']
+          'htgen.js': 'lib/htgen.js'
 
     watch:
       options:
@@ -80,7 +71,6 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', [
     'test'
     'browserify'
-    #'uglify'
   ]
 
   grunt.registerTask 'zen', [

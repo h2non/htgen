@@ -16,10 +16,41 @@ describe 'htgen', ->
     it 'should expose the Generator class', ->
       expect ht.Generator .to.be.a 'function'
        
+    describe 'Node', (_) ->
+
+      it 'should create a new instance of Node class', ->
+        expect new ht.Node .to.be.a 'object' .and.to.be.an.instanceof ht.Node
+
+      it 'should expose child()', ->
+        expect new ht.Node .to.have.property 'child' .that.is.a 'function'
+        expect new ht.Node .to.have.property 'c' .that.is.a 'function'    
+
+      it 'should expose cchild()', ->
+        expect new ht.Node .to.have.property 'cchild' .that.is.a 'function'
+        expect new ht.Node .to.have.property 'cc' .that.is.a 'function'  
+
+      it 'should expose render()', ->
+        expect new ht.Node .to.have.property 'render' .that.is.a 'function'
+        expect new ht.Node .to.have.property 'r' .that.is.a 'function'
+
+    describe 'Generator', (_) ->
+
+      it 'should expose the Generator class', ->
+        expect new ht.Generator(ht!) .to.be.an 'object' .and.to.be.an.instanceof ht.Generator
+
+      it 'should throw a TypeError if the constructor arguments is not an object', ->
+        expect (-> new ht.Generator) .to.throw TypeError
+
+      it 'should expose render()', ->
+        expect new ht.Generator ht! .to.have.property 'render' .that.is.a 'function'
+
   describe 'create', (_) ->
 
-    it 'should create a "div" tag', ->
+    it 'should create a "div" node', ->
       expect ht('div').tag .to.be.equal 'div'
+
+    it 'should create a "div" node by default', ->
+      expect ht().tag .to.be.equal 'div'
 
     it 'should create a node with id attribute', ->
       expect ht('div', { id: 'my-id' }).attributes.id .to.be.equal 'my-id'
@@ -73,8 +104,8 @@ describe 'htgen', ->
         expect ht(' div .cls.another-class# my-id ').attributes.id .to.be.equal 'my-id'
         expect ht(' div .cls.another-class# my-id ').attributes['class'] .to.be.equal 'cls another-class'
 
-  describe 'code generator', (_) ->
-
+  describe 'generator', (_) ->
+    
     it 'should generate a div', ->
       expect ht('div').text! .to.be.equal '<div></div>'
 
@@ -84,6 +115,9 @@ describe 'htgen', ->
     it 'should generate a div with id attribute', ->
       expect ht('#my-id').text! .to.be.equal '<div id="my-id"></div>'
 
+    it 'should generate a div with non-value attribute', ->
+      expect ht('div', { id: null }).text! .to.be.equal '<div id></div>'
+
     it 'should generate a div with style attribute', ->
       expect ht('div', { id: 'main', 'style': { color: 'red' } }).text! 
         .to.be.equal '<div id="main" style="color: red"></div>'
@@ -91,6 +125,14 @@ describe 'htgen', ->
     it 'should generate a div with style attribute list', ->
       expect ht('div', { id: 'main', 'style': { color: 'red', float: 'left' } }).text! 
         .to.be.equal '<div id="main" style="color: red; float: left"></div>'
+    
+    it 'should generate a div with attributes using an array', ->
+      expect ht('div', [ { id: 'main' }, { 'style': { color: 'red', float: 'left' }} ]).text! 
+        .to.be.equal '<div id="main" style="color: red; float: left"></div>'
+
+    it 'should generate a div with styles using an array list', ->
+      expect ht('div', { 'class': [ 'container', 'main' ] }).text! 
+        .to.be.equal '<div class="container main"></div>'
 
     it 'should create a node and use toString() method', ->
       expect ht('p', 'this is a ' + ht('a', { href: 'http://i.am' }, 'link')).render() 
@@ -98,10 +140,66 @@ describe 'htgen', ->
 
     describe 'options', (_) ->
 
-      it 'should generate a well indented code', ->
-        expect ht('div', { 'style': { color: 'red' } }, ht('p', 'text')).render { pretty: yes }
-          .to.be.equal '<div style="color: red">\n  <p>text</p>\n</div>'
-      
-      xit 'should generate a well indented code', ->
-        expect ht('div', { 'style': { color: 'red' } }, ht('p', 'text'), ht('a', ht('span.subtitle'))).render { pretty: yes }
-          .to.be.equal '<div style="color: red"><p>text</p></div>'
+      describe 'pretty', (_) ->
+        
+        it 'should render pretty code with default indent', ->
+          expect ht('div', { 'style': { color: 'red' } }, ht('p', 'text')).render { pretty: yes }
+            .to.be.equal '<div style="color: red">\n  <p>text</p>\n</div>'
+
+        it 'should render pretty code with nested indentation propertly', ->
+          text = ht('div', { 'style': { color: 'red' } }, 
+              ht('p', 'hello'), 
+              ht('p', ht('span.subtitle', ht('i', 'html')))).render { pretty: yes }
+
+          expect text .to.be.equal '''
+          <div style="color: red">
+            <p>hello</p>
+            <p>
+              <span class="subtitle">
+                <i>html</i>
+              </span>
+            </p>
+          </div>
+          '''
+
+      describe 'indent', (_) ->
+        
+        it 'should render pretty code with custom indentation', ->
+          text = ht('div', { 'style': { color: 'red' } }, 
+              ht('p', 'hello'), 
+              ht('p', ht('span.subtitle', ht('i', 'html')))).render { pretty: yes, indent: 4 }
+          
+          expect text .to.be.equal '''
+          <div style="color: red">
+              <p>hello</p>
+              <p>
+                  <span class="subtitle">
+                      <i>html</i>
+                  </span>
+              </p>
+          </div>
+          '''
+
+      describe 'size', (_) ->
+
+        it 'should render pretty code with initial size', ->
+          text = ht('div', { 'style': { color: 'red' } }, 
+              ht('p', 'hello'), 
+              ht('p', ht('span.subtitle', ht('i', 'html')))).render { pretty: yes, size: 2 } .split '\n'
+          
+          expect text[0] .to.be.equal '    <div style="color: red">'
+          expect text[4] .to.be.equal '          <i>html</i>'
+          expect text[7] .to.be.equal '    </div>'
+          
+
+      describe 'tabs', (_) ->
+        
+        it 'should render pretty code with initial size', ->
+          text = ht('div', { 'style': { color: 'red' } }, 
+              ht('p', 'hello'), 
+              ht('p', ht('span.subtitle', ht('i', 'html')))).render { pretty: yes, tabs: true } .split '\n'
+          
+          expect text[0] .to.be.equal '<div style="color: red">'
+          expect text[4] .to.be.equal '\t\t\t<i>html</i>'
+          expect text[7] .to.be.equal '</div>'
+          

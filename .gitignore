@@ -5,4 +5,5 @@ Thumbs.db
 test/fixtures/temp
 test/lib/*.js
 test/fixtures/.tmp
-
+.tmp
+lib/*.js

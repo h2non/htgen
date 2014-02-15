@@ -4,3 +4,6 @@ test/
 *.coffee
 .gitignore
 .travis.yml
+.tmp
+bower.json
+Gruntfile.coffee

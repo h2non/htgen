@@ -1,13 +1,11 @@
 require! {
   chai
-  sinon
-  '../../htgen'
+  ht: '../../'
 }
 
 module.exports =
 
-  ht: htgen
-  sinon: sinon
+  ht: ht
   expect: chai.expect
   should: chai.should
   assert: chai.assert

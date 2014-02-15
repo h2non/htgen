@@ -14,8 +14,9 @@ It was designed to be extremly easy to use and easy to embed in templating engin
 - Tiny: 300 LOC, 5KB minified
 - Simple and elegant API supporting method chaining and more
 - Minified or indented code generation
-- Usable from node and browsers
+- Runs over node and the browser
 - No third party dependencies
+- DOM decoupled
 - Well tested
 
 ## Installation
@@ -70,31 +71,56 @@ ht('p')
 // using methods shortcuts
 ht('ul')
   .c('li',
-    // you can use as well from string concat expressions
+    // you can interpolate it as well in concat string expressions
+    // it overrides the prototype inherited toString() method
     ht('p.link', 'click ' + ht('a', { href: 'http://i.am' }, 'here')))
   .c('li', 
     ht('p', 'some text'))
   .a('class', 'list')
-  .r()
+  // make it pretty!
+  .r({ pretty: true, indent: 4 })
+
+// dynamic
+var fruits = { a: 'Apple', b: 'Banana', c: 'Coco' }
+ht('table.pretty',
+  ht('tr', ht('th'), ht('th', 'fruit')),
+  Object.keys(fruits).map(function (n) {
+    return ht('tr', 
+      ht('th', n),
+      ht('td', fruits[k])
+    )
+  })
+)
 ```
 
 ### htgen(name, [ attrs, child ])
 
-Returns an instance of htgen.Node
+Creates a new node and return an instance of Node
+
+Name argument can be expressed like `name.class1.class2#id`, 
+that is a short cut for setting the class and id attributes
 
 ### htgen.Node(name, [ attrs, child ])
 
 #### attributes
 Type: `object`
+
 Store the node attributes, if are defined
 
 #### tag
 Type: `string`
+
 Store the node tag name
 
 #### childNodes
 Type: `array`
+
 Store the node child nodes instances
+
+#### parent 
+Type: `object`
+
+If the current node is a child node, this points to the parent node instance
 
 #### child(name, [ attrs, child ])
 Alias: `c`
@@ -127,14 +153,37 @@ Chainable: `yes`
 
 Add a new child node
 
+#### hasParent()
+Return: `boolean`
+
+Returns `true` if the current node has parent node, otherwise `false`
+
 ### htgen.Generator(node, [ options ])
 
-#### Options 
+#### options 
 
-- **pretty**: default to `false`
-- **size**: default to `0
-- **indent**: default to `2`
-- **tabs**: default to `false`
+Generator supported options:
+
+- **pretty**: Generate a well-indented code. Default to `false`
+- **size**: Initial indent size. Default to `0`
+- **indent**: Indent spaces. Default to `2`
+- **tabs**: Use tabs instead of spaces to indent. Default to `false`
+
+#### render()
+Return: `string`
+
+#### renderAttrs()
+Return: `string`
+
+#### renderChild()
+Return: `string`
+
+Render the current node child nodes, if they exist
+
+#### indent()
+Return: `string`
+
+Return the string equivalent to the applied indentation characters
 
 ## Contributing
 
@@ -176,6 +225,7 @@ $ grunt release
 
 ## To Do
 
+- JSON map
 - HTML entities convert
 
 ## License
