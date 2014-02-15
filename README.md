@@ -1,7 +1,7 @@
 # htgen
 [![Build Status](https://travis-ci.org/h2non/htgen.png)](https://travis-ci.org/h2non/htgen)
 [![Dependency Status](https://gemnasium.com/h2non/htgen.png)](https://gemnasium.com/h2non/htgen)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)
+![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)
 
 > **SPOILER! Work in progress**
 
