@@ -1,7 +1,7 @@
 # htgen
 [![Build Status](https://travis-ci.org/h2non/htgen.png)](https://travis-ci.org/h2non/htgen)
 [![Dependency Status](https://gemnasium.com/h2non/htgen.png)](https://gemnasium.com/h2non/htgen)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)]
+[[Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)
 
 > **SPOILER! Work in progress**
 
@@ -152,24 +152,29 @@ also keep in mind to follow the same design/code patterns that already exist
 
 Only node.js is required for development
 
-1. Clone/fork this repository
+Clone/fork this repository
 ```
 $ git clone git@github.com:h2non/htgen.git && cd htgen
 ```
 
-2. Install package dependencies
+Install package dependencies
 ```
 $ npm install
 ```
 
-3. Run tests
+Run tests
 ```
 $ npm test
 ```
 
-4. Coding zen mode
+Coding zen mode
 ```
 $ grunt dev [--force]
+```
+
+Distribution release
+```
+$ grunt release
 ```
 
 ## To Do
