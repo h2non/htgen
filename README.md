@@ -49,7 +49,7 @@ Or loading the script remotely (just for testing or development)
 
 ## API
 
-#### Example
+### Example
 
 ```js
 var ht = require('htgen')
@@ -79,39 +79,37 @@ ht('ul')
   .r()
 ```
 
-#### htgen(name, [ attrs, child ])
+### htgen(name, [ attrs, child ])
 
 Returns an instance of htgen.Node
 
-##### Options
+### htgen.Node(name, [ attrs, child ])
 
-#### htgen.Node(name, [ attrs, child ])
-
-##### attributes
+#### attributes
 Type: `object`
 Store the node attributes, if are defined
 
-##### tag
+#### tag
 Type: `string`
 Store the node tag name
 
-##### childNodes
+#### childNodes
 Type: `array`
 Store the node child nodes instances
 
-##### child(name, [ attrs, child ])
+#### child(name, [ attrs, child ])
 Alias: `c`
 Chainable: `yes`
 
 Creates a new child node
 
-##### cchild(name, [ attrs, child ])
+#### cchild(name, [ attrs, child ])
 Alias: `cc`
 Chainable: `yes`
 
 Creates and push new child node, but changes the chain call to the instance of the created child node
 
-##### render([ options ])
+#### render([ options ])
 Alias: `r`, `text`
 Return: `string`
 
@@ -119,20 +117,20 @@ Render and return a string of the current node and its child nodes.
 
 See the supported [render options](#options) bellow
 
-##### attr(name, value)
+#### attr(name, value)
 Alias: `a`
 Chainable: `yes`
 
 Add new attribute to the current node. `name` argument can be an object with key-value maps
 
-##### push(node)
+#### push(node)
 Chainable: `yes`
 
 Add a new child node
 
-#### htgen.Generator(node, [ options ])
+### htgen.Generator(node, [ options ])
 
-##### Options 
+#### Options 
 
 - **pretty**: default to `false`
 - **size**: default to `0
