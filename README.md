@@ -12,8 +12,8 @@ It was designed to be extremly easy to use and easy to embed in templating engin
 ## Features
 
 - Tiny: 300 LOC, 5KB minified
-- Simple and elegant API supporting method chaining and more
-- Minified or indented code generation
+- Simple and elegant API, which supports method chaining and more
+- Minified or pretty well indented code generation
 - Runs over node and the browser
 - No third party dependencies
 - DOM decoupled
