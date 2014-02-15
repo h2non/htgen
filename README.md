@@ -1,20 +1,19 @@
 # htgen
 [![Build Status](https://travis-ci.org/h2non/htgen.png)](https://travis-ci.org/h2non/htgen)
 [![Dependency Status](https://gemnasium.com/h2non/htgen.png)](https://gemnasium.com/h2non/htgen)
-![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)
 
 > **SPOILER! Work in progress**
 
 ## About
 
-htgen is a tiny but featured hypertext markup code generator for JavaScript environments. 
+**htgen** is a tiny but featured hypertext markup code generator for JavaScript environments. 
 It was designed to be extremly easy to use and easy to embed in templating engines
 
 ## Features
 
 - Tiny: 300 LOC, 5KB minified
 - Simple and elegant API supporting method chaining and more
-- Minified or pretty code generation
+- Minified or indented code generation
 - Usable from node and browsers
 - No third party dependencies
 - Well tested
@@ -140,8 +139,8 @@ Add a new child node
 ## Contributing
 
 htgen is completely written in LiveScript.
-Take a look to the language [documentation][3] if you are new with it.
-Please, follow the LiveScript language conventions defined in the [coding style guide][4]
+Take a look to the language [documentation][livescript] if you are new with it.
+Please, follow the LiveScript language conventions defined in the [coding style guide][livescript-style]
 
 You must add new test cases for any feature or refactor you do,
 also keep in mind to follow the same design/code patterns that already exist
@@ -186,3 +185,6 @@ Copyright (c) Tomas Aparicio
 Released under the MIT license
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+[livescript]: http://livescript.net
+[livescript-style]: https://github.com/gkz/LiveScript-style-guide
