@@ -5,3 +5,7 @@
 > **WORK IN PROGESS!**
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/h2non/htgen/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
