@@ -42,10 +42,14 @@ module.exports = (grunt) ->
         options:
           standalone: 'htgen'
         files:
-          'htgen.js': ['lib/htgen.js']
+          'htgen.js': './htgen.js'
 
     uglify:
       options:
+        beautify: true
+        mangle: false
+        compression: true
+        report: 'min'
         banner: '/*! htgen - v<%= pkg.version %> - MIT License - https://github.com/h2non/htgen ' +
           '| Generated <%= grunt.template.today("yyyy-mm-dd hh:MM") %> */\n'
       min:
@@ -76,7 +80,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', [
     'test'
     'browserify'
-    'uglify'
+    #'uglify'
   ]
 
   grunt.registerTask 'zen', [

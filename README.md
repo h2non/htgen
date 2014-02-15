@@ -12,7 +12,7 @@ It was designed to be extremly easy to use and easy to embed in templating engin
 
 ## Features
 
-- Tiny, 300 lines of code
+- Tiny: 300 LOC, 5KB minified
 - Simple and elegant API supporting method chaining and more
 - Minified or pretty code generation
 - Usable from node and browsers
