@@ -18,6 +18,7 @@ exports = module.exports = class Generator
       throw new TypeError 'First argument must be an instance of Node'
 
     @node = node
+    options = { pretty: true } if options is true
     @options = options |> extend (@defaults |> clone), _
 
   indent: ->

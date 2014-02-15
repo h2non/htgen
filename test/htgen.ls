@@ -107,31 +107,31 @@ describe 'htgen', ->
   describe 'generator', (_) ->
     
     it 'should generate a div', ->
-      expect ht('div').text! .to.be.equal '<div></div>'
+      expect ht('div').render! .to.be.equal '<div></div>'
 
     it 'should generate a div with class attribute', ->
-      expect ht('.main.text').text! .to.be.equal '<div class="main text"></div>'
+      expect ht('.main.text').render! .to.be.equal '<div class="main text"></div>'
 
     it 'should generate a div with id attribute', ->
-      expect ht('#my-id').text! .to.be.equal '<div id="my-id"></div>'
+      expect ht('#my-id').render! .to.be.equal '<div id="my-id"></div>'
 
     it 'should generate a div with non-value attribute', ->
-      expect ht('div', { id: null }).text! .to.be.equal '<div id></div>'
+      expect ht('div', { id: null }).render! .to.be.equal '<div id></div>'
 
     it 'should generate a div with style attribute', ->
-      expect ht('div', { id: 'main', 'style': { color: 'red' } }).text! 
+      expect ht('div', { id: 'main', 'style': { color: 'red' } }).render! 
         .to.be.equal '<div id="main" style="color: red"></div>'
 
     it 'should generate a div with style attribute list', ->
-      expect ht('div', { id: 'main', 'style': { color: 'red', float: 'left' } }).text! 
+      expect ht('div', { id: 'main', 'style': { color: 'red', float: 'left' } }).render! 
         .to.be.equal '<div id="main" style="color: red; float: left"></div>'
     
     it 'should generate a div with attributes using an array', ->
-      expect ht('div', [ { id: 'main' }, { 'style': { color: 'red', float: 'left' }} ]).text! 
+      expect ht('div', [ { id: 'main' }, { 'style': { color: 'red', float: 'left' }} ]).render! 
         .to.be.equal '<div id="main" style="color: red; float: left"></div>'
 
     it 'should generate a div with styles using an array list', ->
-      expect ht('div', { 'class': [ 'container', 'main' ] }).text! 
+      expect ht('div', { 'class': [ 'container', 'main' ] }).render! 
         .to.be.equal '<div class="container main"></div>'
 
     it 'should create a node and use toString() method', ->
@@ -190,7 +190,6 @@ describe 'htgen', ->
           expect text[0] .to.be.equal '    <div style="color: red">'
           expect text[4] .to.be.equal '          <i>html</i>'
           expect text[7] .to.be.equal '    </div>'
-          
 
       describe 'tabs', (_) ->
         

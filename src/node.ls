@@ -1,4 +1,4 @@
-{ extend, clone, is-string, is-object, is-array } = require './helpers'
+{ extend, is-string, is-object, is-array } = require './helpers'
 Generator = require './generator'
 
 exports = module.exports = class Node
@@ -69,7 +69,7 @@ exports = module.exports = class Node
       @attributes <<< (name): value
     @
 
-  a: -> @attrs ...
+  a: -> @attr ...
 
   concat-attr: (name, value) -> 
     if name and value
@@ -84,8 +84,6 @@ exports = module.exports = class Node
   render: (options) -> new Generator @, options .render!
 
   r: -> @render ...
-
-  text: -> @render ...
 
   to-string: -> @render ...
 

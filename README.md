@@ -57,7 +57,7 @@ var ht = require('htgen')
 // nested functions calls
 ht('.container#main', { attr: 'value' },
   ht('ul', 
-    ht('li', 'one')
+    ht('li', 'one'),
     ht('li', 'another')))
   .render()
 
@@ -138,9 +138,10 @@ Creates and push new child node, but changes the chain call to the instance of t
 Alias: `r`, `text`
 Return: `string`
 
-Render and return a string of the current node and its child nodes.
+Render and return a string of the current node and all of its child nodes
 
-See the supported [render options](#options) bellow
+See the supported [render options](#options) bellow. 
+You can aditionally simply pass `true` to render prettified code with default options
 
 #### attr(name, value)
 Alias: `a`

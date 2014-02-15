@@ -5,7 +5,7 @@ exports.extend = (target = {}, origin) ->
   for own name, value of origin then target[name] = value
   target
 
-exports.clone = ->
+exports.clone = clone = ->
   target = {}
   for own name, value of it then
     if (value |> is-array) and name isnt 'childNodes'
