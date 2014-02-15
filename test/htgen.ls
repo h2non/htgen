@@ -138,6 +138,12 @@ describe 'htgen', ->
       expect ht('p', 'this is a ' + ht('a', { href: 'http://i.am' }, 'link')).render() 
         .to.be.equal '<p>this is a <a href="http://i.am">link</a></p>'
 
+    describe 'constructors arguments', (_) ->
+
+      it 'should create child nodes with the passed array', ->
+        expect ht('ul', [ ht('li', 'one'), ht('li', 'two')]).render!
+          .to.be.equal '<ul><li>one</li><li>two</li></ul>'
+
     describe 'options', (_) ->
 
       describe 'pretty', (_) ->

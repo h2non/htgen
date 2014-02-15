@@ -32,6 +32,8 @@ exports = module.exports = class Node
         it |> @push
       else if it |> is-string
         it |> @push
+      else if (it |> is-array) and it[0] |> is-node
+        it.for-each ~> it |> @child
       else if (it |> is-object) or (it |> is-array)
         it |> @attr
 

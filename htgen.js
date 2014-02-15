@@ -223,6 +223,13 @@ exports = module.exports = Node = (function(){
       it)) {
         return this$.push(
         it);
+      } else if (isNode(
+      isArray(
+      it) && it[0])) {
+        return it.forEach(function(it){
+          return this$.child(
+          it);
+        });
       } else if (isObject(
       it) || isArray(
       it)) {
