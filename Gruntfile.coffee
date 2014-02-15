@@ -22,13 +22,6 @@ module.exports = (grunt) ->
         dest: 'lib'
         ext: '.js'
 
-      test:
-        expand: true
-        cwd: 'test/lib'
-        src: ['**/*.ls']
-        dest: 'test/lib'
-        ext: '.js'
-
     mochacli:
       options:
         require: ['chai']

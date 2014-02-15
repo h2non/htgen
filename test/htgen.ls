@@ -1,7 +1,7 @@
-{
-  ht
-  expect
-} = require './lib/helper'
+require! {
+  ht: '../'
+  'chai'.expect
+}
 
 describe 'htgen', ->
 
