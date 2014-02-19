@@ -1,11 +1,14 @@
 { extend, clone, is-string, is-object, is-array } = require './helpers'
+doctypes = require './doctypes'
 
 exports = module.exports = class Generator
 
   const EOL = '\n'
   const TAB = '\t'
+  const default-doctype = 'html'
   const tag-open-regex = /^(<[^>]+>)([\s|\t]+)?</
   const tag-close-regex = />([\s|\t]+)?(<\/[^<]+>$)/
+  const doctype-regex = /^doctype(\s+([a-z\.]+))?$/i
 
   defaults:
     pretty: no
@@ -71,10 +74,27 @@ exports = module.exports = class Generator
       it = indent + it
         .replace tag-open-regex, "$1#{EOL}$2<"
         .replace tag-close-regex, ">#{EOL}#{indent}$2"
-      it += EOL if @node.has-parent! 
+      it += EOL if @node.has-parent!
     it
 
+  doctype: ->
+    type = doctype-regex |> @node.tag.match
+    if type and type[2]
+      type[2]
+    else
+      default-doctype
+
+  is-doctype: ->
+    @node.tag |> doctype-regex.test
+
+  is-closed: ->
+
   render: ->
-    "<#{@node.tag}#{@render-attrs!}>#{@render-child!}</#{@node.tag}>" |> @node-indent
+    if @is-doctype!
+      doctypes[@doctype!]
+    else if @node.self-closed
+      "<#{@node.tag}#{@render-attrs!}/>" |> @node-indent
+    else
+      "<#{@node.tag}#{@render-attrs!}>#{@render-child!}</#{@node.tag}>" |> @node-indent
 
   to-string: -> @render ...

@@ -10,6 +10,7 @@ exports = module.exports = class Node
 
   ->
     @tag = 'div'
+    @self-closed = no
     @attributes = {}
     @child-nodes = []
     @apply-args ...
@@ -20,8 +21,9 @@ exports = module.exports = class Node
     else if tag |> is-object
       tag |> @child
     else if tag |> is-string
-      { tagName, attributes } = tag |> parse
+      { tagName, attributes, self-closed } = tag |> parse-tag
       @tag = tagName if tagName
+      @self-closed = self-closed if self-closed
       if attributes
         attributes['class'] |> @concat-attr 'class', _
         if attributes.id
@@ -81,7 +83,13 @@ exports = module.exports = class Node
         @attr ...
     @
 
+  last: -> @child-nodes.slice -1
+
+  l: -> @last ...
+
   has-parent: -> 'parent' |> @has-own-property
+
+  has-child: -> @child-nodes.length > 0
 
   render: (options) -> new Generator @, options .render!
 
@@ -92,12 +100,24 @@ exports = module.exports = class Node
 
 is-node = -> it instanceof Node
 
-parse = ->
-  result = {}
-  [ head, id ] = it.trim!split '#'
-  [ tagName, ...classes ] = head.split '.'
+is-self-closed = -> it.slice(-1) is '!'
 
-  result <<< tagName: tagName.trim! if tagName
+remove-not = -> it.slice 0, -1 
+
+parse-tag = (tag) ->
+  result = {}
+  self-closed = no
+
+  if (tag = tag.trim!) |> is-self-closed
+    tag = tag |> remove-not
+    result <<< self-closed: yes
+
+  [ head, id ] = tag.split '#'
+  [ tag-name, ...classes ] = head.split '.'
+
+  if tag-name
+    result <<< tag-name: tag-name = tag-name.trim!
+
   if id or classes
     attrs = result.attributes = {}
     attrs <<< id: id.trim! if id

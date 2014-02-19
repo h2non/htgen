@@ -54,7 +54,7 @@ var ht = require('htgen')
 
 // nested functions calls
 ht('.container#main', { attr: 'value' },
-  ht('ul', 
+  ht('ul', { styles: { 'z-index': 10 } },
     ht('li', 'one'),
     ht('li', 'another')))
   .render()
@@ -78,6 +78,13 @@ ht('ul')
   // make it pretty!
   .r({ pretty: true, indent: 4 })
 
+// self-closed tags
+ht('img!')
+
+// doctypes definition
+ht('doctype') // default to '<!DOCTYPE html>'
+ht('doctype xml')
+
 // dynamic
 var fruits = { a: 'Apple', b: 'Banana', c: 'Coco' }
 ht('table.pretty',
@@ -89,6 +96,19 @@ ht('table.pretty',
     )
   })
 )
+```
+
+### Doctypes alias
+
+```
+html => <!DOCTYPE html>
+xml => <?xml version="1.0" encoding="utf-8" ?>
+transitional => <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+strict => <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+frameset => <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+1.1 => <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+basic => <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+mobile => <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
 ```
 
 ### htgen(name, [ attrs, child ])
@@ -119,6 +139,11 @@ Store the node child nodes instances
 Type: `object`
 
 If the current node is a child node, this points to the parent node instance
+
+#### selfClosed 
+Type: `boolean`
+
+If the current node tag is self-closed, this attribute will be `true
 
 #### child(name, [ attrs, child ])
 Alias: `c`
@@ -156,6 +181,17 @@ Add a new child node
 Return: `boolean`
 
 Returns `true` if the current node has parent node, otherwise `false`
+
+#### hasChild()
+Return: `boolean`
+
+Returns `true` if the current node has child nodes, otherwise `false`
+
+#### latest()
+Alias: `l`
+Return: `Node`
+
+Return the latest pushed child node
 
 ### htgen.Generator(node, [ options ])
 
