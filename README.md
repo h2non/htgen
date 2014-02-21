@@ -9,12 +9,12 @@ It was designed to be extremly easy to use and easy to embed in templating engin
 
 ## Features
 
-- Tiny: 300 LOC, 5KB minified
-- Simple and elegant API, which supports method chaining and more
+- Tiny: 400 SLOC, 1KB gzipped
+- Simple and elegant API with method chaining and DSL
 - Minified or pretty well indented code generation
 - Runs over node and the browser
 - No third party dependencies
-- DOM decoupled
+- No DOM required
 - Well tested
 
 ## Installation
@@ -92,10 +92,10 @@ ht('table.pretty',
   Object.keys(fruits).map(function (n) {
     return ht('tr', 
       ht('th', n),
-      ht('td', fruits[k])
+      ht('td', fruits[n])
     )
   })
-)
+).render(true)
 ```
 
 ### Doctypes alias
