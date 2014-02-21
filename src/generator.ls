@@ -87,12 +87,12 @@ exports = module.exports = class Generator
   is-doctype: ->
     @node.tag |> doctype-regex.test
 
-  is-closed: ->
+  is-closed: -> @node.self-closed is yes
 
   render: ->
     if @is-doctype!
       doctypes[@doctype!]
-    else if @node.self-closed
+    else if @is-closed!
       "<#{@node.tag}#{@render-attrs!}/>" |> @node-indent
     else
       "<#{@node.tag}#{@render-attrs!}>#{@render-child!}</#{@node.tag}>" |> @node-indent
