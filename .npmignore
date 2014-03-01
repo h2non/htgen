@@ -8,3 +8,4 @@ test/
 bower.json
 Gruntfile.coffee
 /htgen.js
+/htgen.min.js
