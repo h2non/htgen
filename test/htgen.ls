@@ -92,7 +92,7 @@ describe 'htgen', ->
     it 'should parse a "my-id" as id attribute', ->
       expect ht('div#my-id').attributes.id .to.be.equal 'my-id'
 
-    it 'should parse a "img!" as self-closed tag', ->
+    it 'should parse a "!img" as self-closed tag', ->
       expect ht('!img').tag .to.be.equal 'img'
       expect ht('!img').self-closed .to.be.true
 
