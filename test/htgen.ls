@@ -140,7 +140,7 @@ describe 'htgen', ->
         .to.be.equal '<div id="main" style="color: red; float: left"></div>'
     
     it 'should generate a div with attributes using an array', ->
-      expect ht('div', [ { id: 'main' }, { 'style': { color: 'red', float: 'left' }} ]).render! 
+      expect ht('div', { id: 'main', 'style': { color: 'red', float: 'left' }}).render! 
         .to.be.equal '<div id="main" style="color: red; float: left"></div>'
 
     it 'should generate a div with styles using an array list', ->
@@ -174,6 +174,12 @@ describe 'htgen', ->
       it 'should create child nodes with the passed array', ->
         expect ht('ul', [ ht('li', 'one'), ht('li', 'two')]).render!
           .to.be.equal '<ul><li>one</li><li>two</li></ul>'
+
+      describe 'mixed nodes', (_) ->
+
+        it 'should generate multiples child nodes', ->
+          expect ht('div', [ ht('span', 'hi'), 'hello' ]).render! 
+            .to.be.equal '<div><span>hi</span>hello</div>'
 
     describe 'options', (_) ->
 
