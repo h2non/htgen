@@ -34,11 +34,20 @@ module.exports = (grunt) ->
         src: [ 'test/*.ls' ]
 
     browserify:
-      oli:
+      debug:
         options:
           standalone: 'htgen'
         files:
           'htgen.js': 'lib/htgen.js'
+      min:
+        options:
+          beautify: no
+          mangle: yes
+          compress: yes
+          report: 'min'
+          standalone: 'htgen'
+        files:
+          'htgen.min.js': 'lib/htgen.js'
 
     watch:
       options:
