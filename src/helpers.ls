@@ -1,4 +1,3 @@
-
 to-string = Object::to-string
 
 exports.extend = (target = {}, origin) -> 

@@ -79,7 +79,7 @@ ht('ul')
   .r({ pretty: true, indent: 4 })
 
 // self-closed tags
-ht('img!')
+ht('!img')
 
 // doctypes definition
 ht('doctype') // default to '<!DOCTYPE html>'

@@ -100,9 +100,9 @@ exports = module.exports = class Node
 
 is-node = -> it instanceof Node
 
-is-self-closed = -> it.slice(-1) is '!'
+is-self-closed = -> it.slice(0, 1) is '!'
 
-remove-not = -> it.slice 0, -1 
+remove-not = -> it.slice 1
 
 parse-tag = (tag) ->
   result = {}

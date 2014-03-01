@@ -93,14 +93,14 @@ describe 'htgen', ->
       expect ht('div#my-id').attributes.id .to.be.equal 'my-id'
 
     it 'should parse a "img!" as self-closed tag', ->
-      expect ht('img!').tag .to.be.equal 'img'
-      expect ht('img!').self-closed .to.be.true
+      expect ht('!img').tag .to.be.equal 'img'
+      expect ht('!img').self-closed .to.be.true
 
-    it 'should parse a ".class#id!" as self-closed tag', ->
-      expect ht('.class#id!').tag .to.be.equal 'div'
-      expect ht('.class#id!').attributes.id .to.be.equal 'id'
-      expect ht('.class#id!').attributes['class'] .to.be.equal 'class'
-      expect ht('.class#id!').self-closed .to.be.true
+    it 'should parse a "!.class#id" as self-closed tag', ->
+      expect ht('!.class#id').tag .to.be.equal 'div'
+      expect ht('!.class#id').attributes.id .to.be.equal 'id'
+      expect ht('!.class#id').attributes['class'] .to.be.equal 'class'
+      expect ht('!.class#id').self-closed .to.be.true
 
     it 'should parse a "cls.another-class#my-id" as class and id attributes', ->
       expect ht('div.cls.another-class#my-id').tag .to.be.equal 'div'
@@ -152,14 +152,14 @@ describe 'htgen', ->
         .to.be.equal '<p>this is a <a href="http://i.am">link</a></p>'
 
     it 'should create an img self-closed tag', ->
-      expect ht('img!').render() .to.be.equal '<img/>'
+      expect ht('!img').render() .to.be.equal '<img/>'
 
     it 'should create a img self-closed tag with attributes', ->
-      expect ht('img!', { styles: { width: '100px' } }).render() 
+      expect ht('!img', { styles: { width: '100px' } }).render() 
         .to.be.equal '<img styles="width: 100px"/>'
 
     it 'should ignore child nodes in a self-closed tag', ->
-      expect ht('img!', 'some text').render() .to.be.equal '<img/>'
+      expect ht('!img', 'some text').render() .to.be.equal '<img/>'
 
     describe 'doctypes', (_) ->
 

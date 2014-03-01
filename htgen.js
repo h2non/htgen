@@ -1,4 +1,4 @@
-/*! htgen.js - v0.1.2 - MIT License - https://github.com/h2non/htgen | Generated 2014-03-01 05:08 */
+/*! htgen.js - v0.1.3 - MIT License - https://github.com/h2non/htgen | Generated 2014-03-01 10:07 */
 !function(e) {
   if ("object" == typeof exports) module.exports = e(); else if ("function" == typeof define && define.amd) define(e); else {
     var f;
@@ -368,10 +368,10 @@
         return it instanceof Node;
       };
       isSelfClosed = function(it) {
-        return it.slice(-1) === "!";
+        return it.slice(0, 1) === "!";
       };
       removeNot = function(it) {
-        return it.slice(0, -1);
+        return it.slice(1);
       };
       parseTag = function(tag) {
         var result, selfClosed, ref$, head, id, tagName, classes, attrs;
