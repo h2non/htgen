@@ -16,9 +16,7 @@ exports = module.exports = class Node
     @apply-args ...
 
   apply-args: (tag, ...child) ->
-    if tag |> is-node
-      tag |> @child
-    else if tag |> is-object
+    if (tag |> is-node) or (tag |> is-object)
       tag |> @child
     else if tag |> is-string
       { tagName, attributes, self-closed } = tag |> parse-tag
@@ -30,9 +28,7 @@ exports = module.exports = class Node
           @attributes <<< id: attributes.id
 
     child.for-each ~>
-      if it |> is-node
-        it |> @push
-      else if it |> is-string
+      if (it |> is-node) or (it |> is-string)
         it |> @push
       else if (it |> is-array)
         it.for-each ~> it |> @push
